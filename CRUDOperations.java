@@ -13,8 +13,6 @@ public class CRUDOperations {
         try {
              conn = DBConnection.getConnection();
             conn.setAutoCommit(false);
-
-
             String query = "INSERT INTO residents (first_name, last_name, middle_name, birthdate, gender, civil_status, contact_number, is_voter, household_id) VAlUES (?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement ps = conn.prepareStatement(query);
@@ -23,47 +21,31 @@ public class CRUDOperations {
             }   
             int row = ps.executeUpdate();
 
-
-
-            String query2 = "UPDATE households SET totalresidentCount = totalresidentCount + 1 WHERE householdID = ?";
+            String query2 = "UPDATE households SET total_residents = total_residents + 1 WHERE householdID = ?";
             PreparedStatement ps2 = conn.prepareStatement(query2);
-
-          
-
             ps2.setObject(1, data[8]);
             int row2 = ps2.executeUpdate();
 
             conn.commit();
-
-
             return "Inserted successfully!";
-
-
-        }
-
-         catch (Exception e){
+        } catch (Exception e){
             try {
                 if (conn != null) conn.rollback();
-            }
-
-            catch(SQLException rb){
+            } catch(SQLException rb){
                 System.out.println("Rollback failed" + rb.getMessage());
                 }
             return "Failed to commit: " + e.getMessage();
-
+        } finally {
+            DBConnection.closeConnection(conn);
         }
     }
-
 
     public static String viewResidents(){
         Connection conn = null;
         try{
             conn = DBConnection.getConnection();
-
             String query = "SELECT * FROM residents";
-
             PreparedStatement ps = conn.prepareStatement(query);
-
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()){
@@ -84,34 +66,26 @@ public class CRUDOperations {
                   System.out.println("Is Voter: " + (isVoter == 1 ? "Yes" : "No") + " | " + "Household ID: " + houseID);
                   System.out.println("Created At: " + createdAT);
                   System.out.println("==========================================");;
-
-            }
-            
+            } 
             return "Operation Success";
-
                } catch(Exception e){
-                
                   return "Error: " + e.getMessage();
-                
-               }
-               finally{
+               } finally{
                     DBConnection.closeConnection(conn);
                 }
-               
         }
+
+
 
         public static String viewResidentbyID(int input){
         Connection conn = null;
         try{
             conn = DBConnection.getConnection();
-
             String query = "SELECT * FROM residents WHERE id = ?";
-
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, input);
 
             ResultSet rs = ps.executeQuery();
-
             if(rs.next()){
                   String fname = rs.getString("first_name");
                   String lname = rs.getString("last_name");
@@ -130,23 +104,21 @@ public class CRUDOperations {
                   System.out.println("Is Voter: " + (isVoter == 1 ? "Yes" : "No") + " | " + "Household ID: " + houseID);
                   System.out.println("Created At: " + createdAT);
                   System.out.println("==========================================");;
-
             } else {
                 System.out.println("No resident found with ID: " + input);
             }
-            
             return "Operation Success";
+               } catch (Exception e){
 
-               } catch(Exception e){
-                
                   return "Error: " + e.getMessage();
-                
-               }
-               finally{
+
+               } finally{
                     DBConnection.closeConnection(conn);
                 }
-               
         }
+
+
+
         public static String updateResident(String choice, Object newValue, int ID){
             Connection conn  = null;
             try{
@@ -181,6 +153,49 @@ public class CRUDOperations {
                 DBConnection.closeConnection(conn);
             }
             
+        }
+
+
+        public static String deleteResident(int ID){
+            Connection conn = null;
+
+            try{
+                conn = DBConnection.getConnection();
+
+
+                String query0 = "SELECT household_id FROM residents WHERE id = ?";
+                PreparedStatement ps0 = conn.prepareStatement(query0);
+                ps0.setInt(1,ID);
+                ResultSet rs = ps0.executeQuery();
+                int household_ID = 0;
+                
+                while(rs.next()){
+                    household_ID = rs.getInt("household_id");
+                }
+                
+                conn.setAutoCommit(false);
+                String query = "DELETE FROM residents WHERE id = ?";
+                PreparedStatement ps = conn.prepareStatement(query);
+                ps.setInt(1,ID);
+                ps.executeUpdate();
+
+                String query1 = "UPDATE households SET total_residents = total_residents - 1 WHERE household_id = ?";
+                PreparedStatement ps1 = conn.prepareStatement(query1);
+                ps1.setInt(1, household_ID);
+                ps1.executeUpdate();
+
+                conn.commit();
+                return "Deleted Successfully";
+            } catch(Exception e){
+                try{
+                if(conn != null) conn.rollback();
+                } catch(SQLException ab){
+                    System.out.println("Rollback failed: " + ab.getMessage());
+                }return "Failed to Delete: " + e.getMessage();
+            } finally {
+                DBConnection.closeConnection(conn);
+            }
+
         }
 
 
