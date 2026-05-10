@@ -55,11 +55,10 @@ public class CRUDOperations {
     }
 
 
-    public static String viewResidents(Object data[]){
+    public static String viewResidents(){
         Connection conn = null;
         try{
             conn = DBConnection.getConnection();
-            conn.setAutoCommit(false);
 
             String query = "SELECT * FROM residents";
 
@@ -68,18 +67,87 @@ public class CRUDOperations {
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()){
-               rs.getString("first_name");
-               rs.getString("last_name");
-               rs.getString("middle_name");
-               rs.getString("birthdate");
-               rs.getString("gender");
-               rs.getString("civil_status");
-               
-                
+                  String fname = rs.getString("first_name");
+                  String lname = rs.getString("last_name");
+                  String mname =rs.getString("middle_name");
+                  String birthdate = rs.getString("birthdate");
+                  String gender = rs.getString("gender");
+                  String cstatus = rs.getString("civil_status");
+                  String contactNo =rs.getString("contact_number");
+                  int isVoter = rs.getInt("is_voter");
+                  int houseID = rs.getInt("household_id");
+                  String createdAT = rs.getString("created_at");
+
+                  System.out.println("Full name: " + fname + " " + mname + " " + lname);
+                  System.out.println("Birthdate: " + birthdate + " | " + "Gender: " + gender);
+                  System.out.println("Civil Status: " + cstatus + " | " + "Contact Number: " + contactNo);
+                  System.out.println("Is Voter: " + (isVoter == 1 ? "Yes" : "No") + " | " + "Household ID: " + houseID);
+                  System.out.println("Created At: " + createdAT);
+                  System.out.println("==========================================");;
+
             }
-               } 
+            
+            return "Operation Success";
+
+               } catch(Exception e){
+                
+                  return "Error: " + e.getMessage();
+                
+               }
+               finally{
+                    DBConnection.closeConnection(conn);
+                }
                
         }
+
+        public static String viewResidentbyID(int input){
+        Connection conn = null;
+        try{
+            conn = DBConnection.getConnection();
+
+            String query = "SELECT * FROM residents WHERE id = ?";
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, input);
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+                  String fname = rs.getString("first_name");
+                  String lname = rs.getString("last_name");
+                  String mname =rs.getString("middle_name");
+                  String birthdate = rs.getString("birthdate");
+                  String gender = rs.getString("gender");
+                  String cstatus = rs.getString("civil_status");
+                  String contactNo =rs.getString("contact_number");
+                  int isVoter = rs.getInt("is_voter");
+                  int houseID = rs.getInt("household_id");
+                  String createdAT = rs.getString("created_at");
+
+                  System.out.println("Full name: " + fname + " " + mname + " " + lname);
+                  System.out.println("Birthdate: " + birthdate + " | " + "Gender: " + gender);
+                  System.out.println("Civil Status: " + cstatus + " | " + "Contact Number: " + contactNo);
+                  System.out.println("Is Voter: " + (isVoter == 1 ? "Yes" : "No") + " | " + "Household ID: " + houseID);
+                  System.out.println("Created At: " + createdAT);
+                  System.out.println("==========================================");;
+
+            } else {
+                System.out.println("No resident found with ID: " + input);
+            }
+            
+            return "Operation Success";
+
+               } catch(Exception e){
+                
+                  return "Error: " + e.getMessage();
+                
+               }
+               finally{
+                    DBConnection.closeConnection(conn);
+                }
+               
+        }
+        
 
 
     }
