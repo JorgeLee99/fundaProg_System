@@ -147,7 +147,41 @@ public class CRUDOperations {
                 }
                
         }
-        
+        public static String updateResident(String choice, Object newValue, int ID){
+            Connection conn  = null;
+            try{
+                 conn = DBConnection.getConnection();
+                conn.setAutoCommit(false);
+
+                String query = "UPDATE residents SET " + choice + " = ? WHERE id = ?";
+                PreparedStatement ps = conn.prepareStatement(query);
+
+                ps.setObject(1, newValue);
+                ps.setInt(2, ID);
+                int row = ps.executeUpdate();
+
+                if(row == 0){
+                    return "No resident found with ID: " + ID;
+                }
+
+                conn.commit();
+                return "Updated Successfully!";
+               
+            } catch(SQLException e){
+                try{
+                if(conn != null) conn.rollback();
+                } catch(SQLException ab){
+                    System.out.println("Rollback failed: " + ab.getMessage());
+                }
+                return "Database Error: " + e.getMessage();
+                
+            } catch(Exception e){
+                return "Unexpected Error: " + e.getMessage();
+            } finally{
+                DBConnection.closeConnection(conn);
+            }
+            
+        }
 
 
     }
@@ -155,4 +189,4 @@ public class CRUDOperations {
 
 
 
-}
+
