@@ -7,7 +7,7 @@ public class CRUDOperations {
 
 
 
-    public static String insertResidents(Object[] data){
+    public static String processResidentRegistration(Object[] data){
 
         Connection conn = null;
         try {
@@ -40,7 +40,7 @@ public class CRUDOperations {
         }
     }
 
-    public static String viewResidents(){
+    public static String getAllResidents(){
         Connection conn = null;
         try{
             conn = DBConnection.getConnection();
@@ -77,7 +77,7 @@ public class CRUDOperations {
 
 
 
-        public static String viewResidentbyID(int input){
+        public static String getAllREsidentbyID(int input){
         Connection conn = null;
         try{
             conn = DBConnection.getConnection();
@@ -161,6 +161,7 @@ public class CRUDOperations {
 
             try{
                 conn = DBConnection.getConnection();
+                conn.setAutoCommit(false);
 
 
                 String query0 = "SELECT household_id FROM residents WHERE id = ?";
@@ -169,11 +170,11 @@ public class CRUDOperations {
                 ResultSet rs = ps0.executeQuery();
                 int household_ID = 0;
                 
-                while(rs.next()){
+                if(rs.next()){
                     household_ID = rs.getInt("household_id");
+                } else {
+                    return "No resident found with ID: " + ID;
                 }
-                
-                conn.setAutoCommit(false);
                 String query = "DELETE FROM residents WHERE id = ?";
                 PreparedStatement ps = conn.prepareStatement(query);
                 ps.setInt(1,ID);
