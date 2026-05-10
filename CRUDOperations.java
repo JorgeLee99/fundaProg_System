@@ -1,4 +1,4 @@
-package fundaProg_System;
+
 import java.sql.*;
 
 
@@ -7,7 +7,7 @@ public class CRUDOperations {
 
 
 
-    public String insertResidents(int householdID, String name, int age, String address){
+    public static String insertResidents(Object[] data){
 
         Connection conn = null;
         try {
@@ -15,21 +15,22 @@ public class CRUDOperations {
             conn.setAutoCommit(false);
 
 
-            String query = "INSERT INTO residents (householdID, name, age, address) VAlUES (?,?,?,?)";
+            String query = "INSERT INTO residents (first_name, last_name, middle_name, birthdate, gender, civil_status, contact_number, is_voter, household_id) VAlUES (?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, householdID);
-            ps.setString(2, name);
-            ps.setInt(3, age);
-            ps.setString(4, address);
-
+            for(int i = 0; i < data.length; i++){
+                ps.setObject(i + 1, data[i]);
+            }   
             int row = ps.executeUpdate();
 
 
 
             String query2 = "UPDATE households SET totalresidentCount = totalresidentCount + 1 WHERE householdID = ?";
             PreparedStatement ps2 = conn.prepareStatement(query2);
-            ps2.setInt(2, householdID);
+
+          
+
+            ps2.setObject(1, data[8]);
             int row2 = ps2.executeUpdate();
 
             conn.commit();
@@ -54,7 +55,34 @@ public class CRUDOperations {
     }
 
 
+    public static String viewResidents(Object data[]){
+        Connection conn = null;
+        try{
+            conn = DBConnection.getConnection();
+            conn.setAutoCommit(false);
 
+            String query = "SELECT * FROM residents";
+
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+               rs.getString("first_name");
+               rs.getString("last_name");
+               rs.getString("middle_name");
+               rs.getString("birthdate");
+               rs.getString("gender");
+               rs.getString("civil_status");
+               
+                
+            }
+               } 
+               
+        }
+
+
+    }
 
 
 
