@@ -159,10 +159,11 @@ public class InputHelper {
             System.out.println("  [!] Must be 11 digits starting with 09.");
         }
     }
+    // ==========================
+    // VOTER STATUS
+    // ============
 
-    // Voter Status
-
-       public static int getVoterStatus() {
+       public static int getIsVoter() {
         System.out.println("  Is Voter?");
         System.out.println("    [1] Yes");
         System.out.println("    [2] No");
@@ -170,7 +171,9 @@ public class InputHelper {
         int choice = readChoice("  Enter choice: ", 1, 2);
         return (choice == 1) ? 1 : 0;
     }
+// =========================
 // Household ID
+// ===============================
     public static Integer getHouseholdID() {
     while (true) {
         System.out.print("  Household ID (press Enter to skip): ");
@@ -202,6 +205,60 @@ public class InputHelper {
         System.out.println("  [!] ID must be a positive number.");
     }
 }
+
+// ============================
+// OBJECT ARRAY?
+// ===================================
+    public static Object[] buildResidentData() {
+
+    System.out.println("\n--- Enter Resident Details ---");
+
+    String firstName    = getName("  First Name: ");
+    String lastName     = getName("  Last Name: ");
+    String middleName   = getMiddleName();
+    String birthdate    = getBirthdate();
+    String gender       = getGender();
+    String civilStatus  = getCivilStatus();
+    String contactNo    = getContactNumber();
+    int    isVoter      = getIsVoter();
+    Integer householdID = getHouseholdID();
+
+    return new Object[]{
+        firstName,
+        lastName,
+        middleName,
+        birthdate,
+        gender,
+        civilStatus,
+        contactNo,
+        isVoter,
+        householdId
+    };
+}
+
+// =============================================
+// COLUMN UPDATE
+// =============================================
+    public static String getUpdateChoice() {
+
+    System.out.println("\nWhat do you want to update?");
+    System.out.println("[1] First Name");
+    System.out.println("[2] Last Name");
+    System.out.println("[3] Birthdate");
+    System.out.println("[4] Gender");
+    System.out.println("[5] Civil Status");
+    System.out.println("[6] Contact Number");
+
+    int choice = readChoice("Enter choice: ", 1, 6);
+
+    if (choice == 1) return "first_name";
+    if (choice == 2) return "last_name";
+    if (choice == 3) return "birthdate";
+    if (choice == 4) return "gender";
+    if (choice == 5) return "civil_status";
+    return "contact_number";
+}
+
     // ===================================================
     // YES / NO CONFIRM
     // =====================================================
