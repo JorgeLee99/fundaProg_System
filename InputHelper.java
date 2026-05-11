@@ -221,7 +221,7 @@ public class InputHelper {
     String civilStatus  = getCivilStatus();
     String contactNo    = getContactNumber();
     int    isVoter      = getIsVoter();
-    Integer householdID = getHouseholdID();
+    Integer HouseholdID = getHouseholdID();
 
     return new Object[]{
         firstName,
@@ -258,7 +258,37 @@ public class InputHelper {
     if (choice == 5) return "civil_status";
     return "contact_number";
 }
+// =====================================================
+// GET NEW VALUE BASED ON COLUMN (FOR UPDATE)
+// =====================================================
+public static Object getNewValue(String column) {
 
+    if (column.equals("first_name")) {
+        return getName("New First Name: ");
+    }
+
+    if (column.equals("last_name")) {
+        return getName("New Last Name: ");
+    }
+
+    if (column.equals("birthdate")) {
+        return getBirthdate();
+    }
+
+    if (column.equals("gender")) {
+        return getGender();
+    }
+
+    if (column.equals("civil_status")) {
+        return getCivilStatus();
+    }
+
+    if (column.equals("contact_number")) {
+        return getContactNumber();
+    }
+
+    return null;
+}
     // ===================================================
     // YES / NO CONFIRM
     // =====================================================
