@@ -1,17 +1,17 @@
--- ============================================================
+-- ==============================================================
 --  BARANGAY RESIDENT RECORD SYSTEM
 --  Database Schema
 --  Author: Database Engineer
--- ============================================================
+-- ==============================================================
 
 -- 1. Create and select the database
 CREATE DATABASE IF NOT EXISTS barangay_db;
 USE barangay_db;
 
--- ============================================================
+-- ===============================================================
 --  TABLE 1: households
 --  Stores household/address information
--- ============================================================
+-- ==============================================================
 CREATE TABLE IF NOT EXISTS households (
     household_id    INT           AUTO_INCREMENT PRIMARY KEY,
     sitio           VARCHAR(100)  NOT NULL,
