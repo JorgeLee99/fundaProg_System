@@ -13,6 +13,8 @@ public class CRUDOperations {
         try {
              conn = DBConnection.getConnection();
             conn.setAutoCommit(false);
+
+            //inserting values from object
             String query = "INSERT INTO residents (first_name, last_name, middle_name, birthdate, gender, civil_status, contact_number, is_voter, household_id) VAlUES (?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement ps = conn.prepareStatement(query);
@@ -21,6 +23,7 @@ public class CRUDOperations {
             }   
             int row = ps.executeUpdate();
 
+            //update household 
             String query2 = "UPDATE households SET total_residents = total_residents + 1 WHERE householdID = ?";
             PreparedStatement ps2 = conn.prepareStatement(query2);
             ps2.setObject(1, data[8]);
@@ -156,7 +159,7 @@ public class CRUDOperations {
         }
 
 
-        public static String deleteResident(int ID){
+        public static String deleteResident(int id){
             Connection conn = null;
 
             try{
@@ -166,18 +169,18 @@ public class CRUDOperations {
 
                 String query0 = "SELECT household_id FROM residents WHERE id = ?";
                 PreparedStatement ps0 = conn.prepareStatement(query0);
-                ps0.setInt(1,ID);
+                ps0.setInt(1,id);
                 ResultSet rs = ps0.executeQuery();
                 int household_ID = 0;
                 
                 if(rs.next()){
                     household_ID = rs.getInt("household_id");
                 } else {
-                    return "No resident found with ID: " + ID;
+                    return "No resident found with ID: " + id;
                 }
                 String query = "DELETE FROM residents WHERE id = ?";
                 PreparedStatement ps = conn.prepareStatement(query);
-                ps.setInt(1,ID);
+                ps.setInt(1,id);
                 ps.executeUpdate();
 
                 String query1 = "UPDATE households SET total_residents = total_residents - 1 WHERE household_id = ?";
