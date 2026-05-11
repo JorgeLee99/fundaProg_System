@@ -56,7 +56,7 @@ public class InputHelper {
     // ==========================================
     // NAME VALIDATION
     // ==================================
-    public static String readName(String prompt) {
+    public static String getName(String prompt) {
         while (true) {
             System.out.print(prompt);
             String input = scanner.nextLine().trim();
@@ -72,7 +72,7 @@ public class InputHelper {
     // ==============================================
     // OPTIONAL MIDDLE NAME
     // ===========================================
-    public static String readMiddleName() {
+    public static String getMiddleName() {
         System.out.print("  Middle Name (press Enter to skip): ");
         String input = scanner.nextLine().trim();
 
@@ -92,7 +92,7 @@ public class InputHelper {
     // ==========================================
     // BIRTHDATE (REAL DATE CHECK)
     // =============================================
-    public static String readBirthdate() {
+    public static String getBirthdate() {
         while (true) {
             System.out.print("  Birthdate (YYYY-MM-DD): ");
             String input = scanner.nextLine().trim();
@@ -113,7 +113,7 @@ public class InputHelper {
     // =============================================
     // GENDER
     // ==========================================
-    public static String readGender() {
+    public static String getGender() {
         System.out.println("  Gender:");
         System.out.println("    [1] Male");
         System.out.println("    [2] Female");
@@ -129,7 +129,7 @@ public class InputHelper {
     // ================================================
     // CIVIL STATUS
     // ===============================================
-    public static String readCivilStatus() {
+    public static String getCivilStatus() {
         System.out.println("  Civil Status:");
         System.out.println("    [1] Single");
         System.out.println("    [2] Married");
@@ -145,7 +145,7 @@ public class InputHelper {
     // =====================================================
     // CONTACT NUMBER (OPTIONAL)
     // =================================================
-    public static String readContactNumber() {
+    public static String getContactNumber() {
         while (true) {
             System.out.print("  Contact Number (09XXXXXXXXX, press Enter to skip): ");
             String input = scanner.nextLine().trim();
@@ -162,7 +162,7 @@ public class InputHelper {
 
     // Voter Status
 
-       public static int readVoterStatus() {
+       public static int getVoterStatus() {
         System.out.println("  Is Voter?");
         System.out.println("    [1] Yes");
         System.out.println("    [2] No");
@@ -171,7 +171,7 @@ public class InputHelper {
         return (choice == 1) ? 1 : 0;
     }
 // Household ID
-    public static Integer readHouseholdId() {
+    public static Integer getHouseholdID() {
     while (true) {
         System.out.print("  Household ID (press Enter to skip): ");
         String input = scanner.nextLine().trim();
@@ -186,7 +186,22 @@ public class InputHelper {
         System.out.println("  [!] Numbers only please.");
     }
 }
+// ===========================
+// RESIDENT ID
+// =========================
+    public static int getID() {
+    while (true) {
+        System.out.print("  Enter Resident ID: ");
+        String input = scanner.nextLine().trim();
 
+        try {
+            int id = Integer.parseInt(input);
+            if (id > 0) return id;
+        } catch (Exception e) {}
+
+        System.out.println("  [!] ID must be a positive number.");
+    }
+}
     // ===================================================
     // YES / NO CONFIRM
     // =====================================================
