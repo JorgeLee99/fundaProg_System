@@ -1,0 +1,14 @@
+while (true) {
+            showMenu();
+ 
+            try {
+                int choice = Integer.parseInt(scanner.nextLine().trim());
+ 
+                switch (choice) {
+ 
+                    // ------------------------------------------
+                    // OPTION 1 — ADD NEW RESIDENT
+                    // ------------------------------------------
+                    case 1:
+                        try {
+                            System.out.println("\n[ ADD NEW RESIDENT ]");

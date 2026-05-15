@@ -1,0 +1,16 @@
+
+ 
+                            System.out.println("==========================================");
+                            String result = CRUDOperations.getAllREsidentbyID(id);
+                            System.out.println("  Result: " + result);
+                        } catch (Exception e) {
+                            System.out.println("  [ERROR] Failed to search resident: " + e.getMessage());
+                        }
+                        break;
+ 
+                    // ------------------------------------------
+                    // OPTION 4 — UPDATE RESIDENT
+                    // ------------------------------------------
+                    case 4:
+                        try {
+                            System.out.println("\n[ UPDATE

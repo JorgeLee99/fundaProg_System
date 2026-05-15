@@ -1,0 +1,11 @@
+System.out.println("==========================================");
+        System.out.print("  Enter choice: ");
+    }
+ 
+    // =====================================================
+    // MAIN METHOD
+    // =====================================================
+    public static void main(String[] args) {
+ 
+        System.out.println("\n  Welcome to the Barangay Resident Record System!");
+ 

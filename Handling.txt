@@ -1,0 +1,12 @@
+public static void showMenu() {
+        System.out.println();
+        System.out.println("==========================================");
+        System.out.println("    BARANGAY RESIDENT RECORD SYSTEM       ");
+        System.out.println("==========================================");
+        System.out.println("  [1] Add New Resident");
+        System.out.println("  [2] View All Residents");
+        System.out.println("  [3] Search Resident by ID");
+        System.out.println("  [4] Update Resident");
+        System.out.println("  [5] Delete Resident");
+        System.out.println("  [6] Register Resident (Transaction)");
+        System.out.println("  [7] Exit");
