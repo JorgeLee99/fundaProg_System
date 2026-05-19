@@ -37,36 +37,36 @@ public class MainMenuError {
 
                 switch (choice) {
 
-                    // ------------------------------------------
-                    // OPTION 1 — ADD NEW RESIDENT
-                    // ------------------------------------------
-                      case 1:
-                        try {
-                            System.out.println("\n[ ADD NEW RESIDENT ]");
-                            System.out.println("  Note: This will also update the household resident count.");
-                            Object[] data = InputHelper.buildResidentData();
-                            String result = CRUDOperations.processResidentRegistration(data);
-                            System.out.println("\n  Result: " + result);
-                        } catch (Exception e) {
-                            System.out.println("  [ERROR] Failed to add resident: " + e.getMessage());
-                        }
-                        break;
     // ------------------------------------------
-   // OPTION 2 — VIEW ALL RESIDENTS
-   // ------------------------------------------
+    // OPTION 1 — ADD NEW RESIDENT
+    // ------------------------------------------
+         case 1:
+          try {
+            System.out.println("\n[ ADD NEW RESIDENT ]");
+            System.out.println("  Note: This will also update the household resident count.");
+            Object[] data = InputHelper.buildResidentData();
+            String result = CRUDOperations.processResidentRegistration(data);
+            System.out.println("\n  Result: " + result);
+            } catch (Exception e) {
+            System.out.println("  [ERROR] Failed to add resident: " + e.getMessage());
+                }
+                 break;
+// ------------------------------------------
+// OPTION 2 — VIEW ALL RESIDENTS
+// ------------------------------------------
    case 2:
-                        try {
-                            System.out.println("\n[ ALL RESIDENTS ]");
-                            System.out.println("==========================================");
-                            String result = CRUDOperations.getAllResidents();
-                            System.out.println("  Result: " + result);
-                        } catch (Exception e) {
-                            System.out.println("  [ERROR] Failed to retrieve residents: " + e.getMessage());
+            try {
+            System.out.println("\n[ ALL RESIDENTS ]");
+            System.out.println("==========================================");
+            String result = CRUDOperations.getAllResidents();
+            System.out.println("  Result: " + result);
+                 } catch (Exception e) {
+                    System.out.println("  [ERROR] Failed to retrieve residents: " + e.getMessage());
                         }
                         break;
-      // ------------------------------------------
-      // OPTION 3 — SEARCH RESIDENT BY ID
-      // ------------------------------------------
+// ------------------------------------------
+// OPTION 3 — SEARCH RESIDENT BY ID
+// ------------------------------------------
                     case 3:
                         try {
                             System.out.println("\n[ SEARCH RESIDENT BY ID ]");
