@@ -78,3 +78,37 @@ public class MainMenuError {
                             System.out.println("  [ERROR] Failed to search resident: " + e.getMessage());
                         }
                         break;
+
+    // ------------------------------------------
+    // OPTION 4 — UPDATE RESIDENT
+    // ------------------------------------------
+                    case 4:
+                        try {
+                            System.out.println("\n[ UPDATE RESIDENT ]");
+                            int id = InputHelper.getID();
+                            String column = InputHelper.getUpdateChoice();
+                            Object newValue = InputHelper.getNewValue(column);
+                            String result = CRUDOperations.updateResident(column, newValue, id);
+                            System.out.println("\n  Result: " + result);
+                        } catch (Exception e) {
+                            System.out.println("  [ERROR] Failed to update resident: " + e.getMessage());
+                        }
+                        break;
+    // ------------------------------------------
+    // OPTION 5 — DELETE RESIDENT
+    // ------------------------------------------
+                    case 5:
+                        try {
+                            System.out.println("\n[ DELETE RESIDENT ]");
+                            int id = InputHelper.getID();
+                            boolean confirmed = InputHelper.confirm("Are you sure you want to delete Resident ID " + id + "?");
+                            if (confirmed) {
+                                String result = CRUDOperations.deleteResident(id);
+                                System.out.println("\n  Result: " + result);
+                            } else {
+                                System.out.println("  Deletion cancelled.");
+                            }
+                        } catch (Exception e) {
+                            System.out.println("  [ERROR] Failed to delete resident: " + e.getMessage());
+                        }
+                        break;
