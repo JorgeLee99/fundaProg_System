@@ -51,3 +51,30 @@ public class MainMenuError {
                             System.out.println("  [ERROR] Failed to add resident: " + e.getMessage());
                         }
                         break;
+    // ------------------------------------------
+   // OPTION 2 — VIEW ALL RESIDENTS
+   // ------------------------------------------
+   case 2:
+                        try {
+                            System.out.println("\n[ ALL RESIDENTS ]");
+                            System.out.println("==========================================");
+                            String result = CRUDOperations.getAllResidents();
+                            System.out.println("  Result: " + result);
+                        } catch (Exception e) {
+                            System.out.println("  [ERROR] Failed to retrieve residents: " + e.getMessage());
+                        }
+                        break;
+      // ------------------------------------------
+      // OPTION 3 — SEARCH RESIDENT BY ID
+      // ------------------------------------------
+                    case 3:
+                        try {
+                            System.out.println("\n[ SEARCH RESIDENT BY ID ]");
+                            int id = InputHelper.getID();
+                            System.out.println("==========================================");
+                            String result = CRUDOperations.getAllREsidentbyID(id);
+                            System.out.println("  Result: " + result);
+                        } catch (Exception e) {
+                            System.out.println("  [ERROR] Failed to search resident: " + e.getMessage());
+                        }
+                        break;
