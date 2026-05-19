@@ -112,3 +112,32 @@ public class MainMenuError {
                             System.out.println("  [ERROR] Failed to delete resident: " + e.getMessage());
                         }
                         break;
+    // ------------------------------------------
+    // OPTION 6 — EXIT
+    // ------------------------------------------
+            case 6:
+
+                System.out.println("\n  Goodbye! Exiting the system...");
+                System.exit(0);
+                 break;
+
+
+            // ------------------------------------------
+             // INVALID RANGE
+            // ------------------------------------------
+                    default:
+                        System.out.println("  [!] Invalid choice. Please enter a number from 1 to 6.");
+                        break;
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("  [!] Invalid input! Please enter a number only.");
+            } catch (InputMismatchException e) {
+                System.out.println("  [!] Invalid input! Please enter a number only.");
+                scanner.nextLine();
+            } catch (Exception e) {
+                System.out.println("  [ERROR] Something went wrong: " + e.getMessage());
+            }
+        }
+    }
+}
