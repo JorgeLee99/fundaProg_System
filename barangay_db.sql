@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS residents (
     middle_name     VARCHAR(50)   DEFAULT NULL,
     birthdate       DATE          NOT NULL,
     gender          ENUM('Male', 'Female', 'Other') NOT NULL,
-    civil_status    ENUM('Single', 'Married', 'Widowed') NOT N___ULL,
+    civil_status    ENUM('Single', 'Married', 'Widowed') NOT NULL,
     contact_number  VARCHAR(15)   DEFAULT NULL,
     is_voter        TINYINT(1)    DEFAULT 0,   -- 1 = Yes, 0 = No
     is_deleted      TINYINT(1)    DEFAULT 0,   -- Soft delete: 1 = deleted
@@ -50,9 +50,9 @@ CREATE TABLE IF NOT EXISTS residents (
 --  SAMPLE DATA: households
 -- ============================================================
 INSERT INTO households (sitio, total_residents) VALUES
-('Añog','2'),
-('Naga','3'),
-('Rawis','1');
+('Añog',2),
+('Naga',3),
+('Rawis',1);
 
 -- ============================================================
 --  SAMPLE DATA: residents
@@ -64,7 +64,7 @@ VALUES
 ('Maria',   'Santos',    'Reyes',   '2000-07-22', 'Female', 'Single',   '09281234567', 0, 1),
 ('Pedro',   'Reyes',     NULL,      '1985-11-05', 'Male',   'Widowed',  '09391234567', 1, 2),
 ('Ana',     'Garcia',    'Lim',     '1995-01-30', 'Female', 'Married',  '09451234567', 1, 2),
-('Carlos',  'Bautista',  'Cruz',    '2003-09-18', 'Male',   'Single',   NULL,          0, 2);
+('Carlos',  'Bautista',  'Cruz',    '2003-09-18', 'Male',   'Single',   NULL,          0, 2),
 ('Jake',    'Agustin',   'Mendoza', '1995-05-22',  'Male', 'Single',    '09303197483', 1, 3);
 
 -- ============================================================
